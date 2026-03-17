@@ -13,7 +13,7 @@ DocumentNamespace: https://silabs.com
 
 ## Creation Information
 Creator: Organization: Silicon Laboratories, Inc.
-Created: 2026-03-16T17:43:34Z
+Created: 2026-03-17T01:54:51Z
 ## Relationships
 Relationship: SPDXRef-DOCUMENT DESCRIBES SPDXRef-simplicity_sdk-2025.6.2
 
@@ -169,6 +169,17 @@ Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-20
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-sl_main_init
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-sl_main_process_action
 Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-gpio
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-freertos
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-freertos_kernel_cortexm
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-mbedtls_threading_alt_cmsis_rtos2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-sl_main_kernel
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-bluetooth_rtos_adaptation
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-cmsis_os2_ext_task_register
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_tick
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-cmsis_common
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-bluetooth_controller_rtos_adaptation
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_init
+Relationship: SPDXRef-simplicity_sdk-2025.6.2 CONTAINS SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_headers
 
 ## Package Information
 PackageName: EFR32MG24B210F1536IM48
@@ -1880,3 +1891,199 @@ PackageSupplier: Organization: Silicon Laboratories, Inc.
 PackageLicenseConcluded: Zlib
 ## Relationships
 Relationship: SPDXRef-simplicity_sdk-2025.6.2-gpio CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: FreeRTOS Kernel
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-freertos
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: MSLA
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-freertos CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-freertos ANCESTOR_OF SPDXRef-freertos-11.1.0
+
+## Package Information
+PackageName: FreeRTOS kernel
+SPDXID: SPDXRef-freertos-11.1.0
+PackageVersion: 11.1.0
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: AWS open source
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/FreeRTOS/FreeRTOS-Kernel
+ExternalRef: PACKAGE-MANAGER purl https://github.com/FreeRTOS/FreeRTOS-Kernel/releases/tag/V11.1.0
+PackageComment: <text>FreeRTOS kernel, Version 11.1.0</text>
+## Relationships
+Relationship: SPDXRef-freertos-11.1.0 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-freertos
+
+## Package Information
+PackageName: FreeRTOS Kernel ARM Cortex-M Port
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-freertos_kernel_cortexm
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache 2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-freertos_kernel_cortexm CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-freertos_kernel_cortexm ANCESTOR_OF SPDXRef-freertos_kernel_cortexm-11.1.0
+
+## Package Information
+PackageName: CMSIS-FreeRTOS
+SPDXID: SPDXRef-freertos_kernel_cortexm-11.1.0
+PackageVersion: 11.1.0
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: ARM-software
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/ARM-software/CMSIS-FreeRTOS
+ExternalRef: PACKAGE-MANAGER purl https://github.com/ARM-software/CMSIS-FreeRTOS/releases/tag/v11.1.0
+PackageComment: <text>CMSIS-FreeRTOS, Version 11.1.0</text>
+## Relationships
+Relationship: SPDXRef-freertos_kernel_cortexm-11.1.0 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-freertos_kernel_cortexm
+
+## Package Information
+PackageName: Silicon Labs Threading support Mbed TLS
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-mbedtls_threading_alt_cmsis_rtos2
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Zlib
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-mbedtls_threading_alt_cmsis_rtos2 CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: SL Main Kernel
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-sl_main_kernel
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Zlib
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-sl_main_kernel CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: Bluetooth RTOS Adaptation
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-bluetooth_rtos_adaptation
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Zlib AND MSLA
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-bluetooth_rtos_adaptation CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: Task registers abstraction layer
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-cmsis_os2_ext_task_register
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Zlib
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_os2_ext_task_register CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: CMSIS-RTOS2 OS Tick
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_tick
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache 2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_tick CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_tick ANCESTOR_OF SPDXRef-cmsis_rtos2_tick-5.8.0
+
+## Package Information
+PackageName: CMSIS_5
+SPDXID: SPDXRef-cmsis_rtos2_tick-5.8.0
+PackageVersion: 5.8.0
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: ARM-software
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/ARM-software/CMSIS_5
+ExternalRef: PACKAGE-MANAGER purl pkg:github/ARM-software/CMSIS_5@5.8.0
+PackageComment: <text>The CMSIS is a set of tools, APIs, frameworks, and work flows</text>
+## Relationships
+Relationship: SPDXRef-cmsis_rtos2_tick-5.8.0 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_tick
+
+## Package Information
+PackageName: Common APIs for CMSIS-Compliant Kernels
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-cmsis_common
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Zlib
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_common CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: Bluetooth Core
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-bluetooth_controller_rtos_adaptation
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: MSLA
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-bluetooth_controller_rtos_adaptation CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+
+## Package Information
+PackageName: CMSIS-RTOS2 Initialization
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_init
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache 2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_init CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_init ANCESTOR_OF SPDXRef-cmsis_rtos2_init-5.8.0
+
+## Package Information
+PackageName: CMSIS_5
+SPDXID: SPDXRef-cmsis_rtos2_init-5.8.0
+PackageVersion: 5.8.0
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: ARM-software
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/ARM-software/CMSIS_5
+ExternalRef: PACKAGE-MANAGER purl pkg:github/ARM-software/CMSIS_5@5.8.0
+PackageComment: <text>The CMSIS is a set of tools, APIs, frameworks, and work flows</text>
+## Relationships
+Relationship: SPDXRef-cmsis_rtos2_init-5.8.0 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_init
+
+## Package Information
+PackageName: CMSIS-RTOS2 Headers
+SPDXID: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_headers
+PackageVersion: 2025.6.2
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: Silicon Laboratories, Inc.
+PackageLicenseConcluded: Apache 2.0
+## Relationships
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_headers CONTAINED_BY SPDXRef-simplicity_sdk-2025.6.2
+Relationship: SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_headers ANCESTOR_OF SPDXRef-cmsis_rtos2_headers-5.8.0
+
+## Package Information
+PackageName: CMSIS_5
+SPDXID: SPDXRef-cmsis_rtos2_headers-5.8.0
+PackageVersion: 5.8.0
+PrimaryPackagePurpose: LIBRARY
+PackageDownloadLocation: NOASSERTION
+PackageSupplier: Organization: ARM-software
+PackageOriginator: Organization: NOASSERTION
+PackageHomePage: https://github.com/ARM-software/CMSIS_5
+ExternalRef: PACKAGE-MANAGER purl pkg:github/ARM-software/CMSIS_5@5.8.0
+PackageComment: <text>The CMSIS is a set of tools, APIs, frameworks, and work flows.</text>
+## Relationships
+Relationship: SPDXRef-cmsis_rtos2_headers-5.8.0 DESCENDANT_OF SPDXRef-simplicity_sdk-2025.6.2-cmsis_rtos2_headers

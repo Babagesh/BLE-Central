@@ -1,4 +1,5 @@
 #CRC Codes for initially generated config files -- do not modify!
+FreeRTOSConfig.h=548155582
 app_assert_config.h=-1883827836
 app_log_config.h=-508530382
 dmadrv_config.h=281221886
@@ -9,6 +10,8 @@ sl_bluetooth_connection_config.h=-520944776
 sl_board_control_config.h=1942454455
 sl_bt_host_adaptation_config.h=-1571664154
 sl_bt_power_control_config.h=29374747
+sl_bt_rtos_config.h=945845940
+sl_bt_rtos_config_s2.h=-418588248
 sl_btctrl_config.h=216596470
 sl_btctrl_scheduler_priority_config.h=-183428656
 sl_cli_config.h=-1580056190
@@ -20,6 +23,7 @@ sl_debug_swo_config.h=1207363231
 sl_device_init_dcdc_config.h=467347643
 sl_hfxo_manager_config.h=511487363
 sl_iostream_eusart_vcom_config.h=638865525
+sl_main_start_task_config.h=251875913
 sl_mbedtls_config.h=-998329355
 sl_mbedtls_device_config.h=-1083250924
 sl_memory_manager_config.h=-209387538

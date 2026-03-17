@@ -242,13 +242,6 @@ void SL_IOSTREAM_EUSART_RX_IRQ_HANDLER(SL_IOSTREAM_EUSART_VCOM_PERIPHERAL_NO)(vo
 }
 
 
-
- 
-sl_power_manager_on_isr_exit_t sl_iostream_eusart_vcom_sleep_on_isr_exit(void)
-{
-  return sl_iostream_uart_sleep_on_isr_exit(&sl_iostream_vcom);
-}
-
  
 static void events_handler(sl_power_manager_em_t from,
                            sl_power_manager_em_t to)

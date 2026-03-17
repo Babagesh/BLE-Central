@@ -42,6 +42,7 @@ component:
   id: cli
 - {id: clock_manager}
 - {id: device_init}
+- {id: freertos}
 - {id: memory_manager}
 - {id: mpu}
 - {id: printf}

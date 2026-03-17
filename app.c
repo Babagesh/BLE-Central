@@ -19,11 +19,11 @@
  * freely, subject to the following restrictions:
  *
  * 1. The origin of this software must not be misrepresented; you must not
- *    claim that you wrote the original software. If you use this software
- *    in a product, an acknowledgment in the product documentation would be
- *    appreciated but is not required.
+ * claim that you wrote the original software. If you use this software
+ * in a product, an acknowledgment in the product documentation would be
+ * appreciated but is not required.
  * 2. Altered source versions must be plainly marked as such, and must not be
- *    misrepresented as being the original software.
+ * misrepresented as being the original software.
  * 3. This notice may not be removed or altered from any source distribution.
  *
  ******************************************************************************/
@@ -38,6 +38,14 @@
 #endif // SL_CATALOG_CLI_PRESENT
 #include "app.h"
 #include "sl_main_init.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "task.h"
+
+SemaphoreHandle_t ble_sync_sem;
+uint8_t target_connection = 0;
+uint16_t target_characteristic = 0;
+uint8_t rtos_operation_type = 0;
 
 // connection parameters
 #define CONN_INTERVAL_MIN             80   //100ms
@@ -74,6 +82,9 @@ typedef enum {
   discover_services,
   discover_characteristics,
   enable_indication,
+  reading_first,
+  writing,
+  reading_second,
   running
 } conn_state_t;
 
@@ -134,6 +145,7 @@ void app_init(void)
   // Put your additional application init code here!                         //
   // This is called once during start-up.                                    //
   /////////////////////////////////////////////////////////////////////////////
+  ble_sync_sem = xSemaphoreCreateBinary();
 }
 
 /**************************************************************************//**
@@ -171,7 +183,7 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
       // Print boot message.
-      app_log_info("Bluetooth stack booted: v%d.%d.%d+%08lx" APP_LOG_NL,
+      app_log_info("Bluetooth stack booted: v%d.%d.%d+%08lx\r\n",
                    evt->data.evt_system_boot.major,
                    evt->data.evt_system_boot.minor,
                    evt->data.evt_system_boot.patch,
@@ -190,7 +202,7 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
       // Start scanning - looking for thermometer devices
       sc = sl_bt_scanner_start(sl_bt_scanner_scan_phy_1m,
                                sl_bt_scanner_discover_generic);
-      app_assert_status_f(sc, "Failed to start discovery #1" APP_LOG_NL);
+      app_assert_status_f(sc, "Failed to start discovery #1\r\n");
       conn_state = scanning;
       break;
 
@@ -199,13 +211,62 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
     // is received from a responder
     case sl_bt_evt_scanner_legacy_advertisement_report_id:
       // Parse advertisement packets
+
       if (evt->data.evt_scanner_legacy_advertisement_report.event_flags
-          == (SL_BT_SCANNER_EVENT_FLAG_CONNECTABLE | SL_BT_SCANNER_EVENT_FLAG_SCANNABLE)) {
+          == (SL_BT_SCANNER_EVENT_FLAG_CONNECTABLE | SL_BT_SCANNER_EVENT_FLAG_SCANNABLE))
+        {
+          uint8_t *adv_data = evt->data.evt_scanner_legacy_advertisement_report.data.data;
+          uint8_t adv_len = evt->data.evt_scanner_legacy_advertisement_report.data.len;
         // If a thermometer advertisement is found...
         if (find_service_in_advertisement(&(evt->data.evt_scanner_legacy_advertisement_report.data.data[0]),
-                                          evt->data.evt_scanner_legacy_advertisement_report.data.len) != 0) {
+                                          evt->data.evt_scanner_legacy_advertisement_report.data.len) != 0)
+          {
+            app_log_info("Adv Packet with UUID 0x1809 found\r\n");
+            app_log_info("  Address: %02X-%02X-%02X-%02X-%02X-%02X   %d dBm   Type: Adv Packet\r\n",
+           evt->data.evt_scanner_legacy_advertisement_report.address.addr[5],
+           evt->data.evt_scanner_legacy_advertisement_report.address.addr[4],
+           evt->data.evt_scanner_legacy_advertisement_report.address.addr[3],
+           evt->data.evt_scanner_legacy_advertisement_report.address.addr[2],
+           evt->data.evt_scanner_legacy_advertisement_report.address.addr[1],
+           evt->data.evt_scanner_legacy_advertisement_report.address.addr[0],
+           evt->data.evt_scanner_legacy_advertisement_report.rssi);
+
+            app_log_info("--- Raw Data: %d Bytes ---\r\n", adv_len);
+            for (uint8_t k = 0; k < adv_len; k++) {
+              app_log_append("%02X ", adv_data[k]);
+              if ((k + 1) % 8 == 0)
+                app_log_append("\r\n");
+            }
+            app_log_append("\r\n");
+
+
+            app_log_info("---- Data Start ----\r\n");
+            uint8_t i = 0;
+            while (i < adv_len) {
+              uint8_t ad_len = adv_data[i];
+              if (ad_len == 0) break;
+
+              uint8_t ad_type = adv_data[i + 1];
+              uint8_t *payload = &adv_data[i + 2];
+
+              if (ad_type == 0x02 || ad_type == 0x03) {
+                for(uint8_t j = 0; j < ad_len - 1; j += 2) {
+                  app_log_info("0x%02X%02X\r\n", payload[j+1], payload[j]);
+                }
+              }
+              else if (ad_type == 0x08 || ad_type == 0x09) {
+                for(uint8_t j = 0; j < ad_len - 1; j++) {
+                    app_log_append("%c", payload[j]);
+                }
+                app_log_info("\r\n");
+              }
+              i += ad_len + 1;
+            }
+            app_log_info("---- Data End ----\r\n");
+
           // then stop scanning for a while
           sc = sl_bt_scanner_stop();
+          app_log_info("Scanning stopped ... Code: %lX\r\n", (unsigned long)sc);
           app_assert_status(sc);
           // and connect to that device
           if (active_connections_num < SL_BT_CONFIG_MAX_CONNECTIONS) {
@@ -213,6 +274,7 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
                                        evt->data.evt_scanner_legacy_advertisement_report.address_type,
                                        sl_bt_gap_phy_1m,
                                        NULL);
+            app_log_info("Opening a connection ... Code: %lX\r\n", (unsigned long)sc);
             app_assert_status(sc);
             conn_state = opening;
           }
@@ -224,18 +286,27 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
     // This event is generated when a new connection is established
     case sl_bt_evt_connection_opened_id:
       // Discover Health Thermometer service on the responder device
+      app_log_info("Connection Opened...\r\n");
+      app_log_info("  Address: %02X-%02X-%02X-%02X-%02X-%02X\r\n",
+       evt->data.evt_connection_opened.address.addr[5],
+       evt->data.evt_connection_opened.address.addr[4],
+       evt->data.evt_connection_opened.address.addr[3],
+       evt->data.evt_connection_opened.address.addr[2],
+       evt->data.evt_connection_opened.address.addr[1],
+       evt->data.evt_connection_opened.address.addr[0]);
       sc = sl_bt_gatt_discover_primary_services_by_uuid(evt->data.evt_connection_opened.connection,
                                                         sizeof(thermo_service),
                                                         (const uint8_t*)thermo_service);
 
       if (sc == SL_STATUS_INVALID_HANDLE) {
         // Failed to open connection, restart scanning
-        app_log_warning("Primary service discovery failed with invalid handle, dropping client" APP_LOG_NL);
+        app_log_warning("Primary service discovery failed with invalid handle, dropping client\r\n");
         sc = sl_bt_scanner_start(sl_bt_gap_phy_1m, sl_bt_scanner_discover_generic);
         app_assert_status(sc);
         conn_state = scanning;
         break;
       } else {
+        app_log_info("Initiating Primary Service Discovery ... Code: 0x%lX\r\n", (unsigned long)sc);
         app_assert_status(sc);
       }
 
@@ -260,6 +331,13 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
       if (table_index != TABLE_INDEX_INVALID) {
         // Save service handle for future reference
         conn_properties[table_index].thermometer_service_handle = evt->data.evt_gatt_service.service;
+        if (evt->data.evt_gatt_service.uuid.len == 2)
+          {
+             app_log_info("Service Discovered   UUID: 0x%02X%02X\r\n",
+            evt->data.evt_gatt_service.uuid.data[1],
+            evt->data.evt_gatt_service.uuid.data[0]);
+          }
+         app_log_info("  Service handle: 0x%lX\r\n", (unsigned long)evt->data.evt_gatt_service.service);
       }
       break;
 
@@ -270,6 +348,13 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
       if (table_index != TABLE_INDEX_INVALID) {
         // Save characteristic handle for future reference
         conn_properties[table_index].thermometer_characteristic_handle = evt->data.evt_gatt_characteristic.characteristic;
+        if (evt->data.evt_gatt_characteristic.uuid.len == 2)
+          {
+             app_log_info("Characteristic Discovered   UUID: 0x%02X%02X\r\n",
+            evt->data.evt_gatt_characteristic.uuid.data[1],
+            evt->data.evt_gatt_characteristic.uuid.data[0]);
+           }
+          app_log_info("  Characteristic handle: 0x%X\r\n", evt->data.evt_gatt_characteristic.characteristic);
       }
       break;
 
@@ -283,41 +368,48 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
       }
       // If service discovery finished
       if (conn_state == discover_services && conn_properties[table_index].thermometer_service_handle != SERVICE_HANDLE_INVALID) {
+          app_log_info("BLE Procedure Complete\r\n");
+          app_log_info("  Service Discovery Complete\r\n");
+          app_log_info("  Service discovered ... Handle: 0x%lX\r\n", (unsigned long)conn_properties[table_index].thermometer_service_handle);
         // Discover thermometer characteristic on the responder device
         sc = sl_bt_gatt_discover_characteristics_by_uuid(evt->data.evt_gatt_procedure_completed.connection,
                                                          conn_properties[table_index].thermometer_service_handle,
                                                          sizeof(thermo_char),
                                                          (const uint8_t*)thermo_char);
+        app_log_info("  Initiating Characteristic Discovery ... Code: %lX\r\n", (unsigned long)sc);
         app_assert_status(sc);
         conn_state = discover_characteristics;
         break;
       }
       // If characteristic discovery finished
-      if (conn_state == discover_characteristics && conn_properties[table_index].thermometer_characteristic_handle != CHARACTERISTIC_HANDLE_INVALID) {
+      if (conn_state == discover_characteristics && conn_properties[table_index].thermometer_characteristic_handle != CHARACTERISTIC_HANDLE_INVALID)
+        {
+          app_log_info("BLE Procedure Complete\r\n");
+          app_log_info("  Characteristic Discovery Complete\r\n");
+          app_log_info("  Characteristic discovered ... Handle: 0x%X\r\n", conn_properties[table_index].thermometer_characteristic_handle);
         // stop discovering
         sl_bt_scanner_stop();
         // enable indications
-        sc = sl_bt_gatt_set_characteristic_notification(evt->data.evt_gatt_procedure_completed.connection,
-                                                        conn_properties[table_index].thermometer_characteristic_handle,
-                                                        sl_bt_gatt_indication);
-        app_assert_status(sc);
-        conn_state = enable_indication;
+        conn_state = running;
+        app_log_info("App task sees Running State\r\n");
+
+        xSemaphoreGive(ble_sync_sem);
         break;
       }
-      // If indication enable process finished
-      if (conn_state == enable_indication) {
-        // and we can connect to more devices
-        if (active_connections_num < SL_BT_CONFIG_MAX_CONNECTIONS) {
-          // start scanning again to find new devices
-          sc = sl_bt_scanner_start(sl_bt_scanner_scan_phy_1m,
-                                   sl_bt_scanner_discover_generic);
-          app_assert_status_f(sc, "Failed to start discovery #2" APP_LOG_NL);
-          conn_state = scanning;
-        } else {
-          conn_state = running;
-        }
-        break;
-      }
+      if (conn_state == running) {
+                app_log_info("BLE Procedure Complete\r\n");
+                if (rtos_operation_type == 1) {
+                    app_log_info("  Read Request Complete\r\n");
+                    app_log_info("  Read operation success ... Code: 0x%lX\r\n", (unsigned long)evt->data.evt_gatt_procedure_completed.result);
+                } else if (rtos_operation_type == 2) {
+                    app_log_info("  Write Request Complete\r\n");
+                    app_log_info("  Write operation success ... Code: 0x%lX\r\n", (unsigned long)evt->data.evt_gatt_procedure_completed.result);
+                }
+
+                // Unlock the semaphore to wake the RTOS task back up!
+                xSemaphoreGive(ble_sync_sem);
+                break;
+            }
       break;
 
     // -------------------------------
@@ -329,7 +421,7 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
         // start scanning again to find new devices
         sc = sl_bt_scanner_start(sl_bt_scanner_scan_phy_1m,
                                  sl_bt_scanner_discover_generic);
-        app_assert_status_f(sc, "Failed to start discovery #3" APP_LOG_NL);
+        app_assert_status_f(sc, "Failed to start discovery #3\r\n");
         conn_state = scanning;
       }
       break;
@@ -341,22 +433,20 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
       if (table_index == TABLE_INDEX_INVALID) {
         break;
       }
-      if (evt->data.evt_gatt_characteristic_value.value.len >= 5) {
-        char_value = &(evt->data.evt_gatt_characteristic_value.value.data[0]);
-        conn_properties[table_index].temperature = translate_IEEE_11073_temperature_to_float((IEEE_11073_float *)(char_value + 1));
-        conn_properties[table_index].unit = translate_flags_to_temperature_unit(char_value[0]);
-      } else {
-        app_log_warning("Characteristic value too short: %d" APP_LOG_NL,
-                        evt->data.evt_gatt_characteristic_value.value.len);
+      app_log_info("Characteristic value received\r\n");
+      app_log_info("  Connection handle: %d   Characteristic: 0x%X\r\n",
+       evt->data.evt_gatt_characteristic_value.connection,
+       evt->data.evt_gatt_characteristic_value.characteristic);
+
+      uint8_t *val = evt->data.evt_gatt_characteristic_value.value.data;
+            uint8_t len = evt->data.evt_gatt_characteristic_value.value.len;
+
+      app_log_info("  Data: %d Bytes - 0x ", len);
+      for (uint8_t k = 0; k < len; k++) {
+        app_log_append("%02X", val[k]);
+        if (k < len - 1) app_log_append("-");
       }
-      // Send confirmation for the indication
-      sc = sl_bt_gatt_send_characteristic_confirmation(evt->data.evt_gatt_characteristic_value.connection);
-      app_assert_status(sc);
-      // Trigger RSSI measurement on the connection
-      rssi = SL_BT_CONNECTION_RSSI_UNAVAILABLE;
-      sc = sl_bt_connection_get_median_rssi(evt->data.evt_gatt_characteristic_value.connection, &rssi);
-      conn_properties[table_index].rssi = rssi;
-      print_values();
+      app_log_append("\r\n");
       break;
 
     // -------------------------------
@@ -389,7 +479,7 @@ void sl_bt_on_event(sl_bt_msg_t* evt)
       break;
 
     default:
-      app_log_debug("BLE event: 0x%lx" APP_LOG_NL,
+      app_log_debug("BLE event: 0x%lx\r\n",
                     (unsigned long)SL_BT_MSG_ID(evt->header));
       break;
   }
@@ -522,11 +612,11 @@ static float translate_IEEE_11073_temperature_to_float(IEEE_11073_float const *I
 
 /**************************************************************************//**
  * @brief
- *   Function to Read and Cache Bluetooth Address.
+ * Function to Read and Cache Bluetooth Address.
  * @param address_type_out [out]
- *   A pointer to the outgoing address_type. This pointer can be NULL.
+ * A pointer to the outgoing address_type. This pointer can be NULL.
  * @return
- *   Pointer to the cached Bluetooth Address
+ * Pointer to the cached Bluetooth Address
  *****************************************************************************/
 static bd_addr *read_and_cache_bluetooth_address(uint8_t *address_type_out)
 {
@@ -549,16 +639,16 @@ static bd_addr *read_and_cache_bluetooth_address(uint8_t *address_type_out)
 
 /**************************************************************************//**
  * @brief
- *   Function to Print Bluetooth Address.
+ * Function to Print Bluetooth Address.
  * @return
- *   None
+ * None
  *****************************************************************************/
 static void print_bluetooth_address(void)
 {
   uint8_t address_type;
   bd_addr *address = read_and_cache_bluetooth_address(&address_type);
 
-  app_log_info("Bluetooth %s address: %02X:%02X:%02X:%02X:%02X:%02X" APP_LOG_NL,
+  app_log_info("Bluetooth %s address: %02X:%02X:%02X:%02X:%02X:%02X\r\n",
                address_type ? "static random" : "public device",
                address->addr[5],
                address->addr[4],
@@ -591,7 +681,7 @@ void print_values(void)
         app_log_append("ADDR   TEMP   RSSI    TXPW |");
       }
     }
-    app_log_nl();
+    app_log_append("\r\n");
     print_header = false;
   }
 
@@ -619,7 +709,7 @@ void print_values(void)
       app_log_append("----  ------ ------  ------|");
     }
   }
-  app_log_append("\r");
+  app_log_append("\r\n");
 }
 
 #ifdef SL_CATALOG_CLI_PRESENT

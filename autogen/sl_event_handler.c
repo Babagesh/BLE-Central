@@ -9,6 +9,7 @@
 #include "sl_board_control.h"
 #include "app_log.h"
 #include "app.h"
+#include "sl_bt_rtos_adaptation.h"
 #include "sl_bluetooth.h"
 #include "sl_debug_swo.h"
 #include "sl_gpio.h"
@@ -21,6 +22,7 @@
 #include "sli_protocol_crypto.h"
 #include "sli_crypto.h"
 #include "sl_iostream_init_instances.h"
+#include "cmsis_os2.h"
 #include "sl_cos.h"
 #include "sl_iostream_handles.h"
 
@@ -52,6 +54,12 @@ void sl_platform_init(void)
 void sli_internal_init_early(void)
 {
   app_init_bt();
+}
+
+void sl_kernel_start(void)
+{
+  sli_bt_rtos_adaptation_kernel_start();
+  osKernelStart();
 }
 
 void sl_driver_init(void)
@@ -88,24 +96,6 @@ void sl_stack_init(void)
 void sl_internal_app_init(void)
 {
   app_log_init();
-}
-
-void sli_platform_process_action(void)
-{
-}
-
-void sli_service_process_action(void)
-{
-  sl_cli_instances_tick();
-}
-
-void sli_stack_process_action(void)
-{
-  sl_bt_step();
-}
-
-void sli_internal_app_process_action(void)
-{
 }
 
 void sl_iostream_init_instances_stage_1(void)

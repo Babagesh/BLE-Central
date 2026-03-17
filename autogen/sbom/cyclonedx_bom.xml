@@ -10,7 +10,7 @@ referenced in this SBOM.)
 -->
 <bom xmlns="http://cyclonedx.org/schema/bom/1.6" version="1">
   <metadata>
-    <timestamp>2026-03-16T17:43:34Z</timestamp>
+    <timestamp>2026-03-17T01:54:51Z</timestamp>
     <authors>
       <author>
         <name>Silicon Laboratories, Inc.</name>
@@ -1636,6 +1636,216 @@ referenced in this SBOM.)
           <licenses>
             <expression>Zlib</expression>
           </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:freertos" type="library">
+          <name>FreeRTOS Kernel</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>MSLA</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="freertos:11.1.0" type="library">
+                <supplier>
+                  <name>AWS open source</name>
+                </supplier>
+                <name>FreeRTOS kernel</name>
+                <version>11.1.0</version>
+                <purl>https://github.com/FreeRTOS/FreeRTOS-Kernel/releases/tag/V11.1.0</purl>
+                <pedigree>
+                  <notes>FreeRTOS kernel, Version 11.1.0</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/FreeRTOS/FreeRTOS-Kernel</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:freertos_kernel_cortexm" type="library">
+          <name>FreeRTOS Kernel ARM Cortex-M Port</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache 2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="freertos_kernel_cortexm:11.1.0" type="library">
+                <supplier>
+                  <name>ARM-software</name>
+                </supplier>
+                <name>CMSIS-FreeRTOS</name>
+                <version>11.1.0</version>
+                <purl>https://github.com/ARM-software/CMSIS-FreeRTOS/releases/tag/v11.1.0</purl>
+                <pedigree>
+                  <notes>CMSIS-FreeRTOS, Version 11.1.0</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/ARM-software/CMSIS-FreeRTOS</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:mbedtls_threading_alt_cmsis_rtos2" type="library">
+          <name>Silicon Labs Threading support Mbed TLS</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:sl_main_kernel" type="library">
+          <name>SL Main Kernel</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:bluetooth_rtos_adaptation" type="library">
+          <name>Bluetooth RTOS Adaptation</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib AND MSLA</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:cmsis_os2_ext_task_register" type="library">
+          <name>Task registers abstraction layer</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:cmsis_rtos2_tick" type="library">
+          <name>CMSIS-RTOS2 OS Tick</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache 2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="cmsis_rtos2_tick:5.8.0" type="library">
+                <supplier>
+                  <name>ARM-software</name>
+                </supplier>
+                <name>CMSIS_5</name>
+                <version>5.8.0</version>
+                <purl>pkg:github/ARM-software/CMSIS_5@5.8.0</purl>
+                <pedigree>
+                  <notes>The CMSIS is a set of tools, APIs, frameworks, and work flows</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/ARM-software/CMSIS_5</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:cmsis_common" type="library">
+          <name>Common APIs for CMSIS-Compliant Kernels</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Zlib</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:bluetooth_controller_rtos_adaptation" type="library">
+          <name>Bluetooth Core</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>MSLA</expression>
+          </licenses>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:cmsis_rtos2_init" type="library">
+          <name>CMSIS-RTOS2 Initialization</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache 2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="cmsis_rtos2_init:5.8.0" type="library">
+                <supplier>
+                  <name>ARM-software</name>
+                </supplier>
+                <name>CMSIS_5</name>
+                <version>5.8.0</version>
+                <purl>pkg:github/ARM-software/CMSIS_5@5.8.0</purl>
+                <pedigree>
+                  <notes>The CMSIS is a set of tools, APIs, frameworks, and work flows</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/ARM-software/CMSIS_5</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
+        </component>
+        <component bom-ref="simplicity_sdk:2025.6.2:cmsis_rtos2_headers" type="library">
+          <name>CMSIS-RTOS2 Headers</name>
+          <version>2025.6.2</version>
+	      <supplier>
+	        <name>Silicon Laboratories, Inc.</name>
+	      </supplier>
+          <licenses>
+            <expression>Apache 2.0</expression>
+          </licenses>
+          <pedigree>
+            <ancestors>
+              <component bom-ref="cmsis_rtos2_headers:5.8.0" type="library">
+                <supplier>
+                  <name>ARM-software</name>
+                </supplier>
+                <name>CMSIS_5</name>
+                <version>5.8.0</version>
+                <purl>pkg:github/ARM-software/CMSIS_5@5.8.0</purl>
+                <pedigree>
+                  <notes>The CMSIS is a set of tools, APIs, frameworks, and work flows.</notes>
+                </pedigree>
+                <externalReferences>
+                  <reference type="website">
+                    <url>https://github.com/ARM-software/CMSIS_5</url>
+                  </reference>
+                </externalReferences>
+              </component>
+            </ancestors>
+          </pedigree>
         </component>
       </components>
     </component>

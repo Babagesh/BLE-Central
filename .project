@@ -66,6 +66,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/common/inc/sl_bit.h</locationURI>
 		</link>
 		<link>
+			<name>simplicity_sdk_2025.6.2/platform/common/inc/sl_cmsis_os2_common.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/common/inc/sl_cmsis_os2_common.h</locationURI>
+		</link>
+		<link>
 			<name>simplicity_sdk_2025.6.2/platform/common/inc/sl_code_classification.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/common/inc/sl_code_classification.h</locationURI>
@@ -106,6 +111,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/common/inc/sl_string.h</locationURI>
 		</link>
 		<link>
+			<name>simplicity_sdk_2025.6.2/platform/common/inc/sli_cmsis_os2_ext_task_register.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/common/inc/sli_cmsis_os2_ext_task_register.h</locationURI>
+		</link>
+		<link>
 			<name>simplicity_sdk_2025.6.2/platform/common/inc/sli_code_classification.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/common/inc/sli_code_classification.h</locationURI>
@@ -114,6 +124,11 @@
 			<name>simplicity_sdk_2025.6.2/platform/common/src/sl_assert.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/common/src/sl_assert.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/platform/common/src/sl_cmsis_os2_common.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/common/src/sl_cmsis_os2_common.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/common/src/sl_core_cortexm.c</name>
@@ -134,6 +149,11 @@
 			<name>simplicity_sdk_2025.6.2/platform/common/src/sl_syscalls.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/common/src/sl_syscalls.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/platform/common/src/sli_cmsis_os2_ext_task_register.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/common/src/sli_cmsis_os2_ext_task_register.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/emlib/inc/em_assert.h</name>
@@ -416,6 +436,11 @@
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/inc/sl_bt_ll_config.h</locationURI>
 		</link>
 		<link>
+			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/inc/sl_bt_rtos_adaptation.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/inc/sl_bt_rtos_adaptation.h</locationURI>
+		</link>
+		<link>
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/inc/sl_bt_stack_config.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/inc/sl_bt_stack_config.h</locationURI>
@@ -509,6 +534,11 @@
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/inc/sli_bt_sync_config.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/inc/sli_bt_sync_config.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/src/sl_bt_rtos_adaptation.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/src/sl_bt_rtos_adaptation.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/src/sl_bt_stack_init.c</name>
@@ -639,6 +669,21 @@
 			<name>simplicity_sdk_2025.6.2/platform/CMSIS/Core/Include/tz_context.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/CMSIS/Core/Include/tz_context.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/platform/CMSIS/RTOS2/Include/cmsis_os2.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/CMSIS/RTOS2/Include/cmsis_os2.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/platform/CMSIS/RTOS2/Include/os_tick.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/CMSIS/RTOS2/Include/os_tick.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/platform/CMSIS/RTOS2/Source/os_systick.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/CMSIS/RTOS2/Source/os_systick.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/driver/debug/inc/sl_debug_swo.h</name>
@@ -1091,9 +1136,9 @@
 			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/inc/sl_main_init_memory.h</locationURI>
 		</link>
 		<link>
-			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/inc/sl_main_process_action.h</name>
+			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/inc/sl_main_kernel.h</name>
 			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/inc/sl_main_process_action.h</locationURI>
+			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/inc/sl_main_kernel.h</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_init.c</name>
@@ -1106,14 +1151,19 @@
 			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/src/sl_main_init_memory.c</locationURI>
 		</link>
 		<link>
-			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_process_action.c</name>
+			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/src/sl_main_kernel.c</name>
 			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/src/sl_main_process_action.c</locationURI>
+			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/src/sl_main_kernel.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/src/sli_main_init_memory.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/src/sli_main_init_memory.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/src/sli_main_kernel.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/src/sli_main_kernel.h</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/service/sleeptimer/inc/sl_sleeptimer.h</name>
@@ -1174,6 +1224,41 @@
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/bgcommon/src/sli_bgcommon_debug_efr32.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/bgcommon/src/sli_bgcommon_debug_efr32.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/croutine.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/croutine.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/event_groups.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/event_groups.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/list.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/list.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/queue.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/queue.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/stream_buffer.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/stream_buffer.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/tasks.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/tasks.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/timers.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/timers.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/util/third_party/mbedtls/library/alignment.h</name>
@@ -2166,6 +2251,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/security/sl_component/sl_mbedtls_support/inc/sli_psa_crypto.h</locationURI>
 		</link>
 		<link>
+			<name>simplicity_sdk_2025.6.2/platform/security/sl_component/sl_mbedtls_support/inc/threading_alt.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/security/sl_component/sl_mbedtls_support/inc/threading_alt.h</locationURI>
+		</link>
+		<link>
 			<name>simplicity_sdk_2025.6.2/platform/security/sl_component/sl_mbedtls_support/src/sl_mbedtls.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/security/sl_component/sl_mbedtls_support/src/sl_mbedtls.c</locationURI>
@@ -2381,9 +2471,14 @@
 			<locationURI>STUDIO_SDK_LOC/platform/security/sl_component/sli_psec_osal/inc/sli_psec_osal.h</locationURI>
 		</link>
 		<link>
-			<name>simplicity_sdk_2025.6.2/platform/security/sl_component/sli_psec_osal/inc/sli_psec_osal_baremetal.h</name>
+			<name>simplicity_sdk_2025.6.2/platform/security/sl_component/sli_psec_osal/inc/sli_psec_osal_cmsis_rtos2.h</name>
 			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/security/sl_component/sli_psec_osal/inc/sli_psec_osal_baremetal.h</locationURI>
+			<locationURI>STUDIO_SDK_LOC/platform/security/sl_component/sli_psec_osal/inc/sli_psec_osal_cmsis_rtos2.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/platform/security/sl_component/sli_psec_osal/src/sli_psec_osal_cmsis_rtos2.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/security/sl_component/sli_psec_osal/src/sli_psec_osal_cmsis_rtos2.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/platform/service/interrupt_manager/inc/arm/cmsis_nvic_virtual.h</name>
@@ -2431,6 +2526,11 @@
 			<locationURI>STUDIO_SDK_LOC/platform/service/power_manager/src/sleep_loop/sli_power_manager_private.h</locationURI>
 		</link>
 		<link>
+			<name>simplicity_sdk_2025.6.2/platform/service/sl_main/src/rtos/main_retarget.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/platform/service/sl_main/src/rtos/main_retarget.c</locationURI>
+		</link>
+		<link>
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/bgstack/ll/inc/sl_bt_ll_config.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/bgstack/ll/inc/sl_bt_ll_config.h</locationURI>
@@ -2464,6 +2564,116 @@
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/bgstack/ll/src/sl_btctrl_init_tasklets.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/bgstack/ll/src/sl_btctrl_init_tasklets.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/cmsis/Include/freertos_mpool.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/cmsis/Include/freertos_mpool.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/cmsis/Include/freertos_os2.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/cmsis/Include/freertos_os2.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/cmsis/Source/cmsis_os2.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/cmsis/Source/cmsis_os2.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/FreeRTOS.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/FreeRTOS.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/StackMacros.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/StackMacros.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/atomic.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/atomic.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/croutine.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/croutine.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/deprecated_definitions.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/deprecated_definitions.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/event_groups.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/event_groups.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/list.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/list.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/message_buffer.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/message_buffer.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/mpu_prototypes.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/mpu_prototypes.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/mpu_syscall_numbers.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/mpu_syscall_numbers.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/mpu_wrappers.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/mpu_wrappers.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/portable.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/portable.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/projdefs.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/projdefs.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/queue.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/queue.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/semphr.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/semphr.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/stack_macros.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/stack_macros.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/stream_buffer.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/stream_buffer.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/task.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/task.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/include/timers.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/include/timers.h</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/util/third_party/mbedtls/include/mbedtls/aes.h</name>
@@ -3061,6 +3271,16 @@
 			<locationURI>STUDIO_SDK_LOC/platform/radio/rail_lib/plugin/rail_util_built_in_phys/efr32xg24/sl_rail_rfsense_ook_config_40MHz.h</locationURI>
 		</link>
 		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/MemMang/heap_3.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/MemMang/heap_3.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/SiliconLabs/cortexm/tick_power_manager.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/SiliconLabs/cortexm/tick_power_manager.c</locationURI>
+		</link>
+		<link>
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/bgstack/ll/build/gcc/xg24/release/liblinklayer.a</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/bgstack/ll/build/gcc/xg24/release/liblinklayer.a</locationURI>
@@ -3129,6 +3349,36 @@
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/build/gcc/cortex-m33/ble_host/system/release/libble_host_system.a</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/protocol/bluetooth/build/gcc/cortex-m33/ble_host/system/release/libble_host_system.a</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/mpu_wrappers_v2_asm.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/mpu_wrappers_v2_asm.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/port.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/port.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portasm.c</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portasm.c</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portasm.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portasm.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portmacro.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portmacro.h</locationURI>
+		</link>
+		<link>
+			<name>simplicity_sdk_2025.6.2/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portmacrocommon.h</name>
+			<type>1</type>
+			<locationURI>STUDIO_SDK_LOC/util/third_party/freertos/kernel/portable/GCC/ARM_CM33_NTZ/non_secure/portmacrocommon.h</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2025.6.2/protocol/bluetooth/bgcommon/lib/build/gcc/cortex-m33/bgcommon/release/libbgcommon.a</name>
